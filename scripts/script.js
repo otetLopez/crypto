@@ -39,7 +39,7 @@ $(document).ready(function () {
             case BTN_DLOAD_DECRYPTED:
                 createFileForDload(decrypted);
             default:
-                console.log(INFO_LOG + "Button Pressed is not Cryptogize!")
+                // console.log(INFO_LOG + "Button Pressed is not Cryptogize!")
         }
     }); 
 }); 
@@ -51,15 +51,26 @@ $(document).ready(function () {
  */
 function loadFile(process) {
     textFromFileLoaded= "" ;
+
+    // Check first if user has uploaded a file to prevent error.
+    if( document.getElementById("fileToLoad").files.length == 0 ){
+        console.log(INFO_LOG + "No files selected.");
+        alert("No files selected. Estupido.");
+        return;
+    }
+
     var fileToLoad = document.getElementById("fileToLoad").files[0];
     var reader = new FileReader();
     reader.onload = function(progressEvent) {
         textFromFileLoaded = this.result;
-        console.log(INFO_LOG + textFromFileLoaded + "\n ******** End of Text ********");
+        // console.log(INFO_LOG + textFromFileLoaded + "\n ******** End of Text ********");
         // Check if file opened is not empty
         if(textFromFileLoaded.length > 0) {
-            var fileToEncrypt = new File(textFromFileLoaded, getUserPassword(), false);
+            var fileToEncrypt = new File(textFromFileLoaded, getUserPassword(), (process === ENCRYPT) ? false : true);
             processFile(fileToEncrypt, process)
+        } else {
+            alert("Warning: Nothing to "+ process +". File inputted is empty.");
+            console.log(INFO_LOG + "Nothing to "+ process +". File inputted is empty.");
         }
     };
     reader.readAsText(fileToLoad);
