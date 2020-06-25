@@ -6,15 +6,6 @@ import { encryptFile } from './encrypt.js';
 const ERROR = -1;
 const SUCCESS = 0;
 
-// /*** Sample Debug Files Start ***/
-// var file1 = new File("dannie", "password", true);
-// console.log("INFO_DEBUG: " + file1.fname + " with pass " + file1.pwd + " is " + (file1.isEncrypted ? "Encrypted." : "Decrypted"));
-
-// file1.fname = "axl";
-// file1.isEncrypted = false;
-// console.log("INFO_DEBUG: " + file1.fname + " with pass " + file1.pwd + " is " + (file1.isEncrypted ? "Encrypted." : "Decrypted"));
-// /*** Sample Debug Files End ***/
-
 console.log("INFO_DEBUG: Starting main javascript");
 
 /*** This is the main functionality and shall be triggered by events from the site */
@@ -55,7 +46,7 @@ function processFile(fileToEncrypt) {
 }
 
 function getUserPassword() {
-    //Should retrieve password inputted by user
+    // Should retrieve password inputted by user
     // Temporarily returning defaults
     return "default";
 }
