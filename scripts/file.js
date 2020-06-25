@@ -1,5 +1,5 @@
 /**
- * Inputfile object is created whenever there is a fie being uploaded by the user
+ * File Class referes to the file being uploaded by the user for enycryption/decryption
  * @param {string} fname 
  * @param {string} password
  * @param {boolean} isEncrypted 

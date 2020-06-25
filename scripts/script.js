@@ -21,14 +21,16 @@ $(document).ready(function () {
             var fileToLoad = document.getElementById("fileToLoad").files[0];
             var reader = new FileReader();
             reader.onload = function(progressEvent) {
-                var lines = this.result.split('\n');
-                for(var line = 0; line < lines.length; line++) {
-                    textFromFileLoaded += lines[line];
-                }
-                console.log("INFO_DEBUG: " + textFromFileLoaded);
+                // var uneditted = this.result;
+                // console.log(uneditted);
+                // var lines = this.result.split('\n');
+                // for(var line = 0; line < lines.length; line++) {
+                //     textFromFileLoaded += lines[line];
+                // }
+                textFromFileLoaded = this.result;
+                console.log("INFO_DEBUG: " + textFromFileLoaded + "\n ******** End of Text ********");
                 // Check if file opened is not empty
                 if(textFromFileLoaded.length > 0) {
-                    console.log("INFO_DEBUG: Not Empty");
                     var fileToEncrypt = new File(textFromFileLoaded, getUserPassword(), false);
                     processFile(fileToEncrypt)
                 }
