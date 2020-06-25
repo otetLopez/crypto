@@ -14,6 +14,7 @@ console.log("INFO_DEBUG: " + file1.fname + " with pass " + file1.pwd + " is " + 
 
 
 /*** This is the main functionality and shall be triggered by events from the site */
+
 encryptFile(file1);
 
 
