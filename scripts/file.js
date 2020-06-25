@@ -4,18 +4,18 @@
  * @param {string} password
  * @param {boolean} isEncrypted 
  */
-export function File(fname, password, isEncrypted) {
-    var filename = fname;
+export function File(file, password, isEncrypted) {
+    var content = file;
     var pwd = password;
     var isEncrypted = isEncrypted;
 
     Object.defineProperties(this, {
-        "fname": {
+        "content": {
             get: function () {
-                return filename;
+                return content;
             },
             set: function (value) {
-                filename = value;
+                content = value;
             }
         },
         "pwd": {
