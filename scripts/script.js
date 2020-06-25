@@ -1,67 +1,105 @@
 import { File } from "./file.js";
 import { encryptFile } from './encrypt.js';
-
+import { decryptFile } from './decrypt.js';
 
 // Constants
 const ERROR = -1;
 const SUCCESS = 0;
+const ENCRYPT = "ENCRYPT";
+const DECRYPT = "DECRYPT";
 const INFO_LOG = "INFO_DEBUG: ";
 
-console.log(INFO_LOG + "Starting main javascript");
+// Element Constants
+const BTN_ENCRYPT = "btn_enc";
+const BTN_DECRYPT = "btn_dec";
+const BTN_DLOAD_ENCRYPTED = "btn_dload_e";
+const BTN_DLOAD_DECRYPTED = "btn_dload_d";
 
-/*** This is the main functionality and shall be triggered by events from the site */
-
+// Global Variables
 var textFromFileLoaded = "";
 var encrypted = "";
 var decrypted = "";
-var custom_pwd = "";
 
+// Events triggered by button click
 $(document).ready(function () {
     $("button").click(function() { 
         var btn_id = $(this).attr('id');
         console.log(INFO_LOG + "You Pressed " + btn_id);
-        if(btn_id === "btn_enc") {
-            textFromFileLoaded= "" ;
-            var fileToLoad = document.getElementById("fileToLoad").files[0];
-            var reader = new FileReader();
-            reader.onload = function(progressEvent) {
-                textFromFileLoaded = this.result;
-                console.log(INFO_LOG + textFromFileLoaded + "\n ******** End of Text ********");
-                // Check if file opened is not empty
-                if(textFromFileLoaded.length > 0) {
-                    var fileToEncrypt = new File(textFromFileLoaded, getUserPassword(), false);
-                    processFile(fileToEncrypt)
-                }
-            };
-            reader.readAsText(fileToLoad);
-        }
-        else if(btn_id === "btn_dec") {
-            
-        }
-        else if(btn_id === "btn_dload_e") {
-            // Download encrypted file
-            createFileForDload(encrypted);
-        }
-        else if(btn_id === "btn_dload_d") {
-            // Download decrypted file
-            createFileForDload(decrypted);
+
+        switch(btn_id) {
+            case BTN_ENCRYPT:
+                loadFile(ENCRYPT);
+                break;
+            case BTN_DECRYPT:
+                loadFile(DECRYPT);
+                break;
+            case BTN_DLOAD_ENCRYPTED:
+                createFileForDload(encrypted);
+                break;
+            case BTN_DLOAD_DECRYPTED:
+                createFileForDload(decrypted);
+            default:
+                console.log(INFO_LOG + "Button Pressed is not Cryptogize!")
         }
     }); 
 }); 
 
-function processFile(fileToEncrypt) {
-    // Should be implementing a PROMISE here
-    encrypted = "";
-    encrypted = encryptFile(fileToEncrypt);
-    if(encrypted === ERROR) {
-        console.error("ENCRYPTION ERROR");
-        
-    }  else {
-        console.log(INFO_LOG + "Encrypted Data is " + encrypted);
+/**
+ * Functionality : This function reads the file uploaded by the user.
+ * @param {*} process : Needs to be passed to processfile(). 
+ *                      Indicates wheter the file uploaded should be encrypted or decrypted
+ */
+function loadFile(process) {
+    textFromFileLoaded= "" ;
+    var fileToLoad = document.getElementById("fileToLoad").files[0];
+    var reader = new FileReader();
+    reader.onload = function(progressEvent) {
+        textFromFileLoaded = this.result;
+        console.log(INFO_LOG + textFromFileLoaded + "\n ******** End of Text ********");
+        // Check if file opened is not empty
+        if(textFromFileLoaded.length > 0) {
+            var fileToEncrypt = new File(textFromFileLoaded, getUserPassword(), false);
+            processFile(fileToEncrypt, process)
+        }
+    };
+    reader.readAsText(fileToLoad);
+}
 
+/**
+ * Functionality: Does function calls on what process should be executed
+ * @param {*} file :  This is the file object to be encrypted.  Refer to file.js for details of a File class
+ * @param {*} process : Indicates wheter the file uploaded should be encrypted or decrypted
+ */
+function processFile(file, process) {
+    var output = "";
+    switch(process) {
+        case ENCRYPT:
+            encrypted = "";
+            output = encryptFile(file);
+            encrypted = output;
+            break;
+        case DECRYPT:
+            decrypted = "";
+            output = decryptFile(file);
+            decrypted = output;
+            break;
+        default:
+            console.log(INFO_LOG + "Unknown Process");
+            alert("Error: Unknown Process");
+            return;
+    }
+
+    if(output.length > 0) {
+        console.log(INFO_LOG + "Data " + process + "ED is -->" + output);
+    } else {
+        console.log(INFO_LOG + "Processed file empty.");
     }
 }
 
+/**
+ * Functionality: This will generate text file that will be downloaded by user
+ * @param {*} content The content of file to be saved as text
+ */
 function createFileForDload(content) {
     if(!content.length > 0) {
         // No File To Save
@@ -72,11 +110,12 @@ function createFileForDload(content) {
     }
 }
 
+/**
+ * Functionality: Returns encryption code provided by the user 
+ */
 function getUserPassword() {
-    // Should retrieve password inputted by user
-    // Temporarily returning defaults
     var code = document.getElementById('pwd').value;
-    console.log(INFO_LOG + "This is the Ecryption Code >> " + code);
-    return (code.length > 0) ? code : "default";
+    console.log(INFO_LOG + "This is the secret code >> " + code);
+    return (code.length > 0) ? code : "cryptogize!";
 }
 
