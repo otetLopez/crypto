@@ -20,17 +20,11 @@ $(document).ready(function () {
     $("button").click(function() { 
         var btn_id = $(this).attr('id');
         console.log(INFO_LOG + "You Pressed " + btn_id);
-        if(btn_id === "btn_load") {
+        if(btn_id === "btn_enc") {
             textFromFileLoaded= "" ;
             var fileToLoad = document.getElementById("fileToLoad").files[0];
             var reader = new FileReader();
             reader.onload = function(progressEvent) {
-                // var uneditted = this.result;
-                // console.log(uneditted);
-                // var lines = this.result.split('\n');
-                // for(var line = 0; line < lines.length; line++) {
-                //     textFromFileLoaded += lines[line];
-                // }
                 textFromFileLoaded = this.result;
                 console.log(INFO_LOG + textFromFileLoaded + "\n ******** End of Text ********");
                 // Check if file opened is not empty
@@ -40,6 +34,9 @@ $(document).ready(function () {
                 }
             };
             reader.readAsText(fileToLoad);
+        }
+        else if(btn_id === "btn_dec") {
+            
         }
         else if(btn_id === "btn_dload_e") {
             // Download encrypted file

@@ -4,7 +4,7 @@ import { File }  from './file.js';
 // File Constants
 const SUCCESS = 0;
 const ERROR = -1;
-const INFO_LOG = "INFO_DEBUG";
+const INFO_LOG = "INFO_DEBUG: ";
 
 export function encryptFile(file) {
     if(!file.isEncrypted) {
