@@ -6,7 +6,11 @@ const SUCCESS = 0;
 const ERROR = -1;
 const INFO_LOG = "INFO_DEBUG: ";
 
-
+/**
+ * Functionality: This function decrypts file that are decrypted using cryptorama.
+ * @param {*} file  File object generated consisting of text content and password which serves as
+ *                  encryption code
+ */
 export function decryptFile(file) {
     if(file.isEncrypted) {
         console.log(INFO_LOG + "Starting Decryption on file " + file.content + " with pwd " + file.pwd);
@@ -20,19 +24,10 @@ export function decryptFile(file) {
         }
 
         // Remove added header : password + "xyzcryptoxyz"
-        console.log("This is the password we are going to remove " + code);
         var decrypted = textToDecrypt.replace("xyzcryptoxyz", "");
-
-        if(decrypted.search(code) > ERROR) {
-            console.log("FOUND!")
-        }
-
         while(decrypted.search(code) > ERROR) {
             decrypted = decrypted.replace(code, "");
         }
-
-
-        console.log("INFO_DEBUG: Decrypted Data is " + decrypted);
         return decrypted;
     } else {
         console.log(INFO_LOG + " Inputted file is already decrypted");
@@ -40,6 +35,14 @@ export function decryptFile(file) {
     }
 }
 
+/**
+ * Functionality: This will check if the encryption code inputted by the user 
+ * matches with the encryption code inputted by the user.
+ * This will return the index where the encryption header ends, otherwise returns -1 (ERROR)
+ * which indicates the inputted file is not encrypted using Cryptorama
+ * @param {*} content The contents of the encrypted file 
+ * @param {*} code  The password use in the decryption
+ */
 function checkCode(content, code) {
     // Check if the file is encrypted using Cryptorama
     var crypto_idx = content.search("xyzcryptoxyz");
