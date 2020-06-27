@@ -46,6 +46,15 @@ img{
     
 }
 
+.miniImg{
+
+  
+    max-width: 100px;
+    min-height: 100px;
+
+
+}
+
 
 .nav{
     font-family: "Lucida Sans", sans-serif;
@@ -76,57 +85,46 @@ img{
     display: block;   
 }
 
-.menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-   
-        
-    
-}
-.menu li {
-    padding: 8px;
-    margin-bottom: 7px;
-    background-color: #33b5e5;
-    color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    background-color: dimgray;
-    border-radius: 0.5em;
-    text-align: center; 
-}
 
-.menu li a{
-    display: block;
-    text-decoration: none;
-    color: aliceblue
-    
-}
-.menu li:hover {
-    background-color: #0099cc;
-}
 
 h1{
     text-align: center;
-    color: cornflowerblue;
-    font-family: fantasy;
+    color: rgb(40, 54, 82);
+    font-family: cursive;
 }
 
-h3{
-  text-align: center;
-  color: cornflowerblue;
-  font-weight: bold;
-  font-family: fantasy;
-  margin-left: -0.7em;    
-     
-}
+
+
 
 .footer {
-    
+
     color: #ffffff;
     text-align: center;
     font-size: 12px;
     padding: 15px;
 }
+
+.inputBox{
+    color: white;
+    width: 100%;
+
+}
+
+
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
 /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
@@ -164,6 +162,19 @@ h3{
         border-radius: 1em;
         
     }
+
+    .miniImg{
+    
+     
+        position: relative;
+        bottom: 0;
+        top: 200;
+      
+        max-width: 100px;
+        min-height: 100px;
+ 
+
+    }
  
     
     .nav{
@@ -194,28 +205,6 @@ h3{
     text-decoration: none;
     color: darkslategray
 }
-    
-    .menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-      
-    
-}
-.menu li {
-    padding: 8px;
-    margin-bottom: 7px;
-    background-color: #33b5e5;
-    color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    background-color: dimgray;
-    border-radius: 0.5em;
-    text-align: left;
-    
-    }
-
-
 
 }
 
