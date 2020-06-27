@@ -14,49 +14,53 @@
     <script type="module" src="../scripts/script.js"></script>
 </head>
 <body>
-      <tr>
-            <td>Select a File to Load:</td>
-            <td><input type="file" id="fileToLoad"></td>
- 
-            <td><button onclick="loadFileAsText()">Load Selected File</button><td>
-            
-            <br><br><br><br><br>
-            <td><input type="password" id="pwd" placeholder="Encryption Code"></td>
-            <br><br>
-            <td><button id="btn_enc">Encrypt</button><td>
-            <td><button id="btn_dec">Decrypt</button><td></td>
-            <br><br>
-            <td><button id="btn_dload_e">Download Encrypted File</button><td></td>
-            <td><button id="btn_dload_d">Download Decrypted File</button><td></td>
-        </tr>
-    
-    <!-- To give idea about how to read txt files line by line -->
- <script>
-    var textFromFileLoaded="";
 
-    function loadFileAsText(){
-    var fileToLoad = document.getElementById("fileToLoad").files[0];
+       
+  <div class="col-12">
+    <a href="index.html">
+        <img src="../images/indexBackground.png" alt="Main Logo" class="mainlogo">
+          </a>
+         
+  </div>
 
-    var reader = new FileReader();
-    reader.onload = function(progressEvent){
- 
-    var lines = this.result.split('\n');
-    //console.log(this.result);
-    for(var line = 0; line < lines.length; line++){
-   
-    textFromFileLoaded += lines[line];
-    
-    }
- 
-    console.log(textFromFileLoaded);
-    
-    
-  };
+  <!-- navigation bar -->
+    <div class="col-12 nav">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="getbrochure.html">About</a></li>
+  </ul>
+</div>
 
-  reader.readAsText(fileToLoad);
+  <div class="col-12">
+    <div class="col-1"></div>
+    <!-- Encryption image button -->
+    <div class="col-4">
+      <a href="encryption.html">
+        <img src="../images/encryption.jpg" alt="Main Logo" class="imgButton">
+          </a>
+         
+    </div>
+    <div class="col-2"></div>
+    <!-- Decryption image button -->
+    <div class="col-4">
+      <a href="decryption.html">
+        <img src="../images/decryption.jpg" alt="Main Logo" class="imgButton">
+          </a>
+    </div>
+    <div class="col-1"></div>
+  </div>
+
+  <footer>
+
+    <div class="footer">
+      <p>@ Copyright 2020 CRYPTORAMA MAD_6135</p>
+    </div>
   
-      
-  };
-</script>
+</footer>
+     
+ 
+
+
+
 </body>
 </html>
