@@ -34,10 +34,10 @@ $(document).ready(function () {
                 loadFile(DECRYPT);
                 break;
             case BTN_DLOAD_ENCRYPTED:
-                createFileForDload(encrypted);
+                createFileForDload(encrypted,ENCRYPT);
                 break;
             case BTN_DLOAD_DECRYPTED:
-                createFileForDload(decrypted);
+                createFileForDload(decrypted, DECRYPT);
             default:
                 // console.log(INFO_LOG + "Button Pressed is not Cryptogize!")
         }
@@ -102,6 +102,7 @@ function processFile(file, process) {
 
     if(output.length > 0) {
         console.log(INFO_LOG + "Data " + process + "ED is -->" + output);
+        alert("Successfully " + process.toLowerCase() + "ed inputted data.  You may download the file");
     } else {
         console.log(INFO_LOG + "Processed file empty.");
     }
@@ -111,13 +112,35 @@ function processFile(file, process) {
  * Functionality: This will generate text file that will be downloaded by user
  * @param {*} content The content of file to be saved as text
  */
-function createFileForDload(content) {
+function createFileForDload(content, process) {
     if(!content.length > 0) {
         // No File To Save
         alert("ERROR: No file to save.  Please upload file to encrypt or decrypt");
         console.log(INFO_LOG + "No file to save.")
     } else {
-        window.open("data:application/txt," + encodeURIComponent(content), "_self");
+        // window.open("data:application/txt," + encodeURIComponent(content), "_self");
+
+        var data = content;
+        var filename = "cryptorama_" + process.toLowerCase() + "ed.txt"; 
+  
+        var file = new Blob([data], {type: 'text/plain'});
+        if (window.navigator.msSaveOrOpenBlob) {// IE10+
+            console.log("I am saving")
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        }
+        else { // Others
+            console.log(INFO_LOG + "Saving ecrypted file.");
+            var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+            }, 0); 
+        }
     }
 }
 
